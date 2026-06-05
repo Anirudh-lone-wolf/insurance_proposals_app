@@ -107,7 +107,8 @@ export const listProposalsService = async (query) => {
 
   // list query
   let selectQuery = `
-        SELECT p.id, p.full_name, p.mobile_number, p.city, COUNT(m.id) AS number_of_members
+        SELECT p.id, p.full_name, p.mobile_number, p.city, COUNT(m.id) AS number_of_members, 
+        DATE_FORMAT(p.created_at, '%d %b %Y, %h %i %p') AS created_date
         FROM proposals p 
         LEFT JOIN proposal_members m on p.id = m.proposal_id
     `;

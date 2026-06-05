@@ -16,7 +16,7 @@ export const createProposalController = async (req, res) => {
 
     const result = await createProposalService(req.body);
 
-    logger.success("Proposal created successfully");
+    logger.success("Proposal created successfully", result);
 
     return sendSuccess(res, "Proposal created successfully", result, 201);
   } catch (error) {
@@ -31,7 +31,7 @@ export const listProposalsController = async (req, res) => {
 
     const result = await listProposalsService(req.query);
 
-    logger.success("Proposals fetched successfully");
+    logger.success("Proposals fetched successfully", result);
 
     return sendSuccess(res, "Proposals fetched successfully", result, 200);
   } catch (error) {
@@ -49,7 +49,7 @@ export const viewProposalController = async (req, res) => {
 
     if (!result) return sendError(res, "Proposal not found", 404);
 
-    logger.success("Proposal fetched successfully");
+    logger.success("Proposal fetched successfully", result);
 
     return sendSuccess(res, "Proposal fetched successfully", result, 200);
   } catch (error) {
@@ -67,7 +67,7 @@ export const updateProposalController = async (req, res) => {
 
     if (!result) return sendError(res, "Proposal not found", 404);
 
-    logger.success("Proposal updated successfully");
+    logger.success("Proposal updated successfully", result);
 
     return sendSuccess(res, "Proposal updated successfully", result, 200);
   } catch (error) {
@@ -85,7 +85,7 @@ export const deleteProposalController = async (req, res) => {
 
     if (!result) return sendError(res, "Proposal not found", 404);
 
-    logger.success("Proposal deleted successfully");
+    logger.success("Proposal deleted successfully", result);
 
     return sendSuccess(res, "Proposal deleted successfully", null, 200);
   } catch (error) {
