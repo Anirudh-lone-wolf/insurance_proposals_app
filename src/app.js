@@ -1,7 +1,7 @@
 // Import express package
 import express from 'express';
 import { info } from './utils/logger.util.js';
-// import { initializeRoutes } from './routes/index.routes.js';
+import { initializeRoutes } from './routes/index.routes.js';
 
 // Create express application object
 const app = express();
@@ -32,7 +32,7 @@ app.get('/', (req,res) => {
     info('Insurance Policy Management System Running');
 });
 
-// initializeRoutes(app);
+initializeRoutes(app);
 
 // Export app object
 export  {app};
