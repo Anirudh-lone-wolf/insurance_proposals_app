@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Insurance Proposals Management</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        
+        <header>
+            <h1>Insurance Proposals</h1>
+            <a href="create.html">+ New Proposal</a>
+        </header>
+
+        <main>
+
+            <div class=""toolbar>
+                <input type="text" id="searchInput" placeholder="Search by ID, name or mobile....">
+                <button id="searchBtn">Search</button>
+                <button id="clearBtn"> Clear</button>
+            </div>
+
+            <table id="proposalTable">
+                <thead>
+                    <tr>
+                        <th>Proposal ID</th>
+                        <th>Customer Name</th>
+                        <th>Mobile Number</th>
+                        <th>City</th>
+                        <th>Members</th>
+                        <th>Created Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="proposalTableBody">
+                    
+                </tbody>
+            </table>
+
+            <div id="pagination"></div>
+
+        </main>
+
+        <script src="js/index.js"></script>
+    </body>
+</html>

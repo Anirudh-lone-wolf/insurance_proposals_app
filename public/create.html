@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Insurance Proposals Management</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        
+        <header>
+            <h1>Create New Proposal</h1> 
+            <a href="index.html">Back to List</a>
+        </header>
+
+        <main>
+            <form id="proposalForm" onsubmit="return false;">
+                <!--STEP 1 -->
+                <div id="step1">
+                    <h2>Step 1 - Primary Details</h2>
+
+                    <label>Full Name</label>
+                    <input type="text" id="full_name" placeholder="Enter full name">
+
+                    <label>Mobile Number</label>
+                    <input type="text" id="mobile_number" placeholder="Enter mobile number">
+
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+
+                    <label>Date of Birth</label>
+                    <input type="date" id="dob" />
+
+                    <label>Gender</label>
+                    <select name="gender" id="gender">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label>City</label>
+                    <input type="text" id="city" placeholder="Enter city" />
+
+                    <label>Occupation</label>
+                    <input type="text" id="occupation" placeholder="Enter occupation" />
+
+                    <!--Members Section-->
+                    <h3>Family Members</h3>
+                    <div id="membersContainer">
+                        
+                    </div>
+                    <button type="button" onclick="addMember()">+ Add Member</button>
+
+                    <br/><br/>
+                    <button type="button" onclick="goToStepTwo()">Next ➡️</button>
+                </div>
+
+                <!--Step 2-->
+                <div id="step2" style="display: none;">
+                    <h2>Policy Details</h2>
+
+                    <label>Currently Insured?</label>
+                    <select name="currently_insured" id="currently_insured" 
+                            onchange="togglePolicyFields()">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+
+                    <div id="policyFields" style="display: none;">
+                        <label>Insurance Company</label>
+                        <input type="text" id="insurance_company" />
+
+                        <label>Policy Number</label>
+                        <input type="text" id="policy_number" />
+
+                        <label>Policy Start Date</label>
+                        <input type="date" id="policy_start_date" />
+
+                        <label>Policy Expiry Date</label>
+                        <input type="date" id="policy_expiry_date" />
+
+                        <label>Sum Insured</label>
+                        <input type="number" id="sum_insured" />
+
+                        <label>Claim History?</label>
+                            <select id="claim_history" onchange="toggleClaimField()">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+
+                        <div id="claimField" style="display: none;">
+                         <label>Claim Amount</label>
+                        <input type="number" id="claim_amount" />
+                        </div>
+                    </div>
+
+                    <label>Address</label>
+                    <textarea id="address" rows="3" placeholder="Enter address"></textarea>
+
+                    <br/><br/>
+                    <button type="button" onclick="goToStepOne()">⬅️ Back</button>
+                    <button type="button" onclick="submitProposal()">Submit</button>
+                </div>
+
+                <!--Error Message Area-->
+                <div id="errorBox" style="color: red; margin-top:12px"></div>
+            </form>
+            
+        </main>
+
+        <script src="js/create.js"></script>
+    </body>
+</html>
