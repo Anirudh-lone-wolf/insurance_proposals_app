@@ -118,7 +118,8 @@ async function submitProposal() {
         sum_insured : document.getElementById('sum_insured').value,
         claim_history : document.getElementById('claim_history').value,
         claim_amount : document.getElementById('claim_amount').value,
-        members = collectMembers()
+        address: document.getElementById('address').value,
+        members : collectMembers()
     }
 
     // send data to api

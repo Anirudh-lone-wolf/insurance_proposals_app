@@ -126,14 +126,21 @@ export const createProposalValidator = [
     .withMessage("Claim amount is required if claim history exists")
     .bail()
     .isNumeric()
-    .withMessage("Claim amount must be a number"),
+    .withMessage("Claim amount must be a number")
+    .bail()
+    .custom( (value, {req}) => {
+      if(value > req.body.sum_insured) {
+        throw new Error("Claim amount cannot be greater than sum insured.")
+      }
+    }),
 
   body("address")
     .trim()
     .notEmpty()
     .withMessage("Address is required")
     .bail()
-    .matches(/^[A-Za-z0-9\s,./-]+$/),
+    .matches(/^[A-Za-z0-9\s,./-]+$/)
+    .withMessage("Invalid Address data"),
 
   body("members").optional().isArray().withMessage("Invalid Members data"),
 
@@ -182,8 +189,6 @@ export const updateProposalValidator = [
   body("full_name")
     .optional()
     .trim()
-    .notEmpty()
-    .withMessage("Name cannot be empty")
     .matches(/^[A-Za-z\s]+$/)
     .withMessage("Name should contain only alphabets"),
 
@@ -217,16 +222,12 @@ export const updateProposalValidator = [
   body("city")
     .optional()
     .trim()
-    .notEmpty()
-    .withMessage("City cannot be empty")
     .matches(/^[A-Za-z\s]+$/)
     .withMessage("City should contain only alphabets"),
 
   body("occupation")
     .optional()
     .trim()
-    .notEmpty()
-    .withMessage("Occupation cannot be empty")
     .matches(/^[A-Za-z\s]+$/)
     .withMessage("Occupation should contain only alphabets"),
 
@@ -236,34 +237,26 @@ export const updateProposalValidator = [
     .withMessage("Currently insured must be 0 or 1"),
 
   body("insurance_company")
-  .if(body("currently_insured").equals("1"))
+  .optional()
   .trim()
-  .notEmpty().withMessage("Insurance company is required if currently insured")
-  .bail()
   .matches(/^[A-Za-z0-9\s\-\.]+$/)
   .withMessage("Enter a valid insurance company name"),
 
   body("policy_number")
-  .if(body("currently_insured").equals("1"))
+  .optional()
   .trim()
-  .notEmpty().withMessage("Policy number is required if currently insured")
-  .bail()
   .matches(/^[A-Za-z0-9]{8,20}$/)
   .withMessage("Policy number must be 8-20 alphanumeric characters"),
 
   body("policy_start_date")
-    .if(body("currently_insured").equals("1"))
-    .notEmpty()
-    .withMessage("Policy start date is required if currently insured")
-    .bail()
+    .optional()
+    .trim()
     .isDate()
     .withMessage("Enter a valid policy start date"),
 
   body("policy_expiry_date")
-    .if(body("currently_insured").equals("1"))
-    .notEmpty()
-    .withMessage("Policy expiry date is required if currently insured")
-    .bail()
+    .optional()
+    .trim()
     .isDate()
     .withMessage("Enter a valid policy expiry date")
     .bail()
@@ -276,10 +269,8 @@ export const updateProposalValidator = [
     }),
 
   body("sum_insured")
-    .if(body("currently_insured").equals("1"))
-    .notEmpty()
-    .withMessage("Sum insured is required if currently insured")
-    .bail()
+    .optional()
+    .trim()
     .isNumeric()
     .withMessage("Sum insured must be a number"),
 
@@ -289,12 +280,16 @@ export const updateProposalValidator = [
     .withMessage("Claim history must be 0 or 1"),
 
   body("claim_amount")
-    .if(body("claim_history").equals("1"))
-    .notEmpty()
-    .withMessage("Claim amount is required if claim history exists")
-    .bail()
+    .optional()
+    .trim()
     .isNumeric()
-    .withMessage("Claim amount must be a number"),
+    .withMessage("Claim amount must be a number")
+    .bail()
+    .custom( (value, {req}) => {
+      if(value > req.body.sum_insured) {
+        throw new Error("Claim amount cannot be greater than sum insured.")
+      }
+    }),
 
   body("address")
     .optional()
@@ -305,33 +300,26 @@ export const updateProposalValidator = [
   body("members").optional().isArray().withMessage("Invalid members data"),
 
   body("members.*.member_name")
-    .if(body("members").isArray({ min: 1 }))
+    .optional()
     .trim()
-    .notEmpty()
-    .withMessage("Member name is required")
     .matches(/^[A-Za-z\s]+$/)
     .withMessage("Member name should contain only alphabets"),
 
     body("members.*.relationship")
-    .if(body("members").isArray({ min: 1 }))
+    .optional()
     .trim()
-    .notEmpty()
-    .withMessage("Relationship is required")
-    .bail()
-    .matches(/^[A-Za-z\s-]+$/),
+    .matches(/^[A-Za-z\s-]+$/)
+    .withMessage("Enter a valid Relationship name"),
 
   body("members.*.gender")
-    .if(body("members").isArray({ min: 1 }))
-    .notEmpty()
-    .withMessage("Member gender is required")
+    .optional()
+    .trim()
     .isIn(["Male", "Female", "Other"])
     .withMessage("Invalid gender value"),
 
   body("members.*.dob")
-    .if(body("members").isArray({ min: 1 }))
-    .notEmpty()
-    .withMessage("Member date of birth is required")
-    .bail()
+    .optional()
+    .trim()
     .isDate()
     .withMessage("Enter a valid date")
     .custom((value) => {
