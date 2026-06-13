@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Proposal</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Edit Proposal</h1>
+            <a href="index.html">Back to List</a>
+        </header>
+
+        <main>
+
+            <div id="errorBox" style="color: red; margin-top: 12px;"></div>
+
+            <h3>Personal Details</h3>
+
+            <label>Full Name</label>
+            <input type="text" id="full_name"><br>
+
+            <label>Mobile Number</label>
+            <input type="text" id="mobile_number"><br>
+
+            <label>Email</label>
+            <input type="email" id="email"><br>
+
+            <label>Date of Birth</label>
+            <input type="date" id="dob"><br>
+
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+
+            <label>City</label>
+            <input type="text" id="city"><br>
+
+            <label>Occupation</label>
+            <input type="text" id="occupation"><br>
+
+            <label>Address</label><br>
+            <textarea id="address"></textarea><br>
+
+            <h3>Insurance Details</h3>
+
+            <label>Currently Insured?</label>
+            <select id="currently_insured">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br>
+
+            <label>Insurance Company</label>
+            <input type="text" id="insurance_company"><br>
+
+            <label>Policy Number</label>
+            <input type="text" id="policy_number"><br>
+
+            <label>Policy Start Date</label>
+            <input type="date" id="policy_start_date"><br>
+
+            <label>Policy Expiry Date</label>
+            <input type="date" id="policy_expiry_date"><br>
+
+            <label>Sum Insured</label>
+            <input type="number" id="sum_insured"><br>
+
+            <label>Claim History?</label>
+            <select id="claim_history">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br>
+
+            <label>Claim Amount</label>
+            <input type="number" id="claim_amount"><br>
+
+            <h3>Family Members</h3>
+            <div id="membersContainer"></div>
+            <button id="addMemberBtn">+ Add Member</button>
+
+            <br><br>
+            <button id="submitBtn">Save Changes</button>
+            <button id="cancelBtn">Cancel</button>
+
+        </main>
+
+        <script type="module" src="js/edit.js"></script>
+    </body>
+</html>
